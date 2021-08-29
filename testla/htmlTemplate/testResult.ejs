@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<style>
+    .content {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.header {
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.test_suite {
+  background-color: #efefef;
+  margin: 2rem 0rem;
+}
+.test_suite .info {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  border-bottom: 2px solid #898989;
+  padding: 0.15rem 1rem;
+}
+.test_suite .info p {
+  color: #898989;
+  font-weight: bold;
+}
+.test_suite .info p.passed {
+  color: green;
+}
+.test_suite .info p.failed {
+  color: red;
+}
+.test_suite .info p:nth-of-type(n + 2) {
+  text-align: right;
+}
+.test_suite .testcase {
+  display: grid;
+  grid-template-areas: "suit test status" "error error error";
+  grid-template-columns: 1fr 2fr 3fr;
+  margin-left: 30px;
+  position: relative;
+  padding: 0px 1rem;
+  padding-left: 35px;
+  border-bottom: 1px solid gray;
+}
+.test_suite .testcase:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background-color: #efefef;
+}
+.test_suite .testcase--passed:before {
+  width: 37px;
+  height: 37px;
+}
+.test_suite .testcase .suitename {
+  grid-area: suit;
+}
+.test_suite .testcase .testname {
+  grid-area: test;
+}
+.test_suite .testcase .status {
+  grid-area: status;
+}
+.test_suite .testcase pre {
+  grid-area: error;
+}
+.test_suite .testcase--passed {
+  color: green;
+  font-weight: bold;
+  background-color: #e0f1c1;
+}
+.test_suite .testcase--failed {
+  color: red;
+  font-weight: bold;
+  background-color: #febabb;
+}
+.test_suite .testcase p:last-of-type {
+  text-align: right;
+  font-weight: normal;
+}
+</style>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <h2>Test Results</h2>
+            <p>Test Started at <%= testDate %> </p>
+        </div>
+        <% descripes.forEach(function(descripe) { %>
+            <div class="test_suite">
+                <div class="info">
+                    <p><%= descripe.testFileName %></p>
+                    <p class="passed">passed: <%= descripe.passed %></p>
+                    <p class="failed">failed: <%= descripe.failed %></p>
+                    <p><%= descripe.descripeTime %>s</p>
+                </div>
+                <% descripe.its.forEach(function(it) { %>
+                    <% if(it.errorMessage){ %>
+                        <div class="testcase testcase--failed">
+                      <% } else{ %>  
+                        <div class="testcase testcase--passed">
+                     <% } %>
+                     <p class="suitename">Suite: <%= descripe.descripeName %></p>
+                     <p class="testname"><%= it.name %></p>
+                     <% if(it.errorMessage){ %>
+                        <p class="status">failed after <%= it.itTime %>s</p>
+                        <pre><%= it.errorMessage %></pre>
+                      <% } else{ %>  
+                        <p class="status">passed in <%= it.itTime %>s</p>
+                     <% } %>
+                    </div>
+                <% }); %>
+            </div>
+        <% }); %>
+      </div>
+    </div>
+</body>
+</html>

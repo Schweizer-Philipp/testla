@@ -1,0 +1,19 @@
+{
+  "name": "test_lambdas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:lambda:inventory": "sam local invoke UpdateInventory --event events/event.json",
+    "co:login": "aws codeartifact login --tool npm --repository testla --domain testla --domain-owner 754190025304 --region eu-central-1",
+    "preinstall": "npm run co:login && npm config set registry https://registry.npmjs.org/",
+    "testla:update": "npm update && npm install @ps/testla -g"
+  },
+  "author": "Philipp Schweizer",
+  "license": "ISC",
+  "dependencies": {
+    "@ps/testla": "^1.201.0",
+    "aws-sdk": "^2.974.0"
+  }
+}

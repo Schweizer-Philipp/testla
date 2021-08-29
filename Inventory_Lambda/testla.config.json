@@ -1,0 +1,35 @@
+{
+    "testDirectory": [
+        "Update_Inventory/test/"
+    ],
+    "testFiles": "spec",
+    "lambdas": {
+        "inventory-Lambda": {
+            "path": "Update_Inventory/update_inventory.js"
+        }
+    },
+    "s3Buckets": [
+        {
+            "enviromentName": "testBucket"
+        }
+    ],
+    "dynamoDbs": [
+        {
+            "enviromentName": "testDynamoTable",
+            "properties": [{
+                "AttributeName": "Products",
+                "AttributeType": "S"
+            }],
+            "keys": [{
+                "AttributeName": "Products",
+                "KeyType": "HASH"
+            }]
+        }
+    ],
+    "sqsQeueus" : [
+        {
+            "enviromentName": "testSqsUrl",
+            "fifo": true
+        }
+    ]
+}

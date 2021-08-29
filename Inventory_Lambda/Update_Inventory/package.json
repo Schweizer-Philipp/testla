@@ -1,0 +1,12 @@
+{
+  "name": "update_iventory",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Philipp Schweizer",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "scripts": {
+    "test": "mocha tests/unit/"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@ps/testla",
+  "version": "1.201.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "pretty": "prettier --write \"./lib/\"",
+    "check": "prettier --check \"./lib/\"",
+    "build": "tsc --noUnusedLocals --noUnusedParameters & exit 0",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "co:login": "aws codeartifact login --tool npm --repository testla --domain testla --domain-owner $DOMAIN_OWNER --region eu-central-1",
+    "prepare": "npm run co:login",
+    "testla:publish": "npm run build && npm run co:login && npm version minor && npm publish && npm config set registry https://registry.npmjs.org/"
+  },
+  "author": "Philipp Schweizer",
+  "license": "ISC",
+  "bin": {
+    "testla": "dist/cli/cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "^15.3.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.944.0",
+    "chalk": "^4.1.1",
+    "dateformat": "^4.5.1",
+    "ejs": "^3.1.6",
+    "get-stream": "^6.0.1",
+    "lambda-local": "^2.0.0",
+    "yargs": "^17.0.1"
+  }
+}
